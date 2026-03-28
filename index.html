@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Installer des modèles d'IA en CLI</title>
+  <title>Installation AI CLI Complete</title>
   <style>
     :root {
       --bg: #0b0f19;
@@ -11,6 +11,8 @@
       --text: #ffffff;
       --muted: #c7d2fe;
       --accent: #7c9cff;
+      --success: #7dffbe;
+      --warn: #ffd98e;
       --border: #2b3757;
     }
 
@@ -49,6 +51,10 @@
       line-height: 1.6;
     }
 
+    h3 {
+      margin-bottom: 8px;
+    }
+
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -81,6 +87,39 @@
       white-space: nowrap;
     }
 
+    .section-title {
+      margin-top: 28px;
+      margin-bottom: 12px;
+      font-size: 1.2rem;
+      color: var(--success);
+    }
+
+    .test-list {
+      margin-top: 8px;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .tag {
+      display: inline-block;
+      margin-top: 6px;
+      font-size: 0.78rem;
+      color: #0c1c12;
+      background: var(--success);
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .optional {
+      color: var(--warn);
+      font-size: 0.85rem;
+      margin-top: 8px;
+      display: inline-block;
+    }
+
     .hint {
       margin-top: 20px;
       font-size: 0.95rem;
@@ -98,25 +137,57 @@
 </head>
 <body>
   <main class="container">
-    <h1>Installer des outils IA en CLI</h1>
+    <h1>🔥 INSTALLATION AI CLI COMPLETE</h1>
     <p>
-      Voici des exemples rapides pour installer des outils d'IA en ligne de commande avec npm.
-      Assure-toi d'avoir <strong>Node.js</strong> et <strong>npm</strong> déjà installés.
+      Pack d'installation prêt à copier/coller pour les CLI IA principaux.
+      Assure-toi d'avoir <strong>Node.js</strong> et <strong>npm</strong> déjà installés avant de lancer les commandes.
     </p>
 
     <section class="grid">
       <article class="card">
-        <h2>Google Gemini CLI</h2>
-        <p>Installe l'outil CLI Gemini globalement :</p>
-        <code>npm install -g @google/gemini-cli</code>
+        <h2>OpenAI Codex (coding agent)</h2>
+        <span class="tag">Installé en global</span>
+        <code>npm i -g @openai/codex</code>
       </article>
 
       <article class="card">
-        <h2>OpenAI Codex CLI</h2>
-        <p>Installe Codex en global :</p>
-        <code>npm install -g @openai/codex</code>
+        <h2>Google Gemini (open source + gratuit)</h2>
+        <span class="tag">Installé en global</span>
+        <code>npm i -g @google/gemini-cli</code>
+      </article>
+
+      <article class="card">
+        <h2>Claude (Anthropic)</h2>
+        <span class="tag">Installé en global</span>
+        <code>npm i -g @anthropic-ai/claude-code</code>
+      </article>
+
+      <article class="card">
+        <h2>Multi-modèles (Claude + GPT + DeepSeek + Grok)</h2>
+        <span class="tag">Installé en global</span>
+        <code>npm i -g claudish</code>
+      </article>
+
+      <article class="card">
+        <h2>Grok CLI (multi-provider + automation)</h2>
+        <span class="tag">Installé en global</span>
+        <code>npm i -g @vibe-kit/grok-cli</code>
+      </article>
+
+      <article class="card">
+        <h2>Vibe CLI</h2>
+        <span class="optional">(OPTIONNEL)</span>
+        <code>npm i -g vibe-cli</code>
       </article>
     </section>
+
+    <h3 class="section-title">🚀 COMMANDES DE TEST</h3>
+    <ul class="test-list">
+      <li><code>codex</code></li>
+      <li><code>gemini</code></li>
+      <li><code>claude</code></li>
+      <li><code>grok</code></li>
+    </ul>
 
     <p class="hint">
       Astuce : si la commande globale échoue, essaie avec droits admin (sudo sur Linux/macOS)
