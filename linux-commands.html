@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Commandes Terminal Linux</title>
+  <style>
+    :root {
+      --bg: #0b0f19;
+      --card: #141b2d;
+      --text: #ffffff;
+      --muted: #c7d2fe;
+      --accent: #7c9cff;
+      --success: #7dffbe;
+      --warn: #ffd98e;
+      --border: #2b3757;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, Arial, sans-serif;
+      background: radial-gradient(circle at top, #1a2340 0%, var(--bg) 45%);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 24px;
+    }
+
+    .container {
+      width: min(1100px, 100%);
+      margin: 0 auto;
+      background: linear-gradient(160deg, #121a2b, var(--card));
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+      padding: 28px;
+    }
+
+    .nav {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+
+    .nav a {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 0.9rem;
+      background: #0f1628;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .nav a:hover {
+      background: #1e2d50;
+      border-color: var(--accent);
+    }
+
+    .nav a.active {
+      background: #1e2d50;
+      border-color: var(--success);
+      color: var(--success);
+    }
+
+    h1 {
+      margin-top: 0;
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      line-height: 1.2;
+    }
+
+    p {
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    h3 {
+      margin-bottom: 8px;
+    }
+
+    .section-title {
+      margin-top: 32px;
+      margin-bottom: 14px;
+      font-size: 1.2rem;
+      color: var(--success);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 8px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 14px;
+    }
+
+    .card {
+      background: #0f1628;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 16px;
+    }
+
+    .card h2 {
+      margin: 0 0 4px 0;
+      font-size: 1rem;
+      color: var(--accent);
+    }
+
+    .card p {
+      margin: 0 0 8px 0;
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    .code-wrapper {
+      position: relative;
+      margin-top: 6px;
+    }
+
+    code {
+      display: block;
+      background: #050914;
+      border: 1px solid #273458;
+      border-radius: 10px;
+      padding: 10px 40px 10px 12px;
+      color: #d6e1ff;
+      font-family: "Fira Code", Consolas, monospace;
+      font-size: 0.88rem;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+
+    .copy-btn {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      background: transparent;
+      border: 1px solid #2b3757;
+      border-radius: 6px;
+      padding: 4px 6px;
+      cursor: pointer;
+      color: #7c9cff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s, color 0.2s;
+      line-height: 1;
+    }
+
+    .copy-btn:hover {
+      background: #1e2d50;
+      color: #fff;
+    }
+
+    .copy-btn.copied {
+      color: #7dffbe;
+      border-color: #7dffbe;
+    }
+
+    .copy-btn svg {
+      width: 14px;
+      height: 14px;
+      pointer-events: none;
+    }
+
+    .tag {
+      display: inline-block;
+      margin-bottom: 6px;
+      font-size: 0.75rem;
+      color: #0c1c12;
+      background: var(--success);
+      border-radius: 999px;
+      padding: 3px 9px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .tag.warn {
+      background: var(--warn);
+      color: #2c1e00;
+    }
+
+    a {
+      color: #9bb2ff;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <nav class="nav">
+      <a href="index.html">🤖 Installation AI CLI</a>
+      <a href="linux-commands.html" class="active">🐧 Commandes Linux</a>
+    </nav>
+
+    <h1>🐧 COMMANDES TERMINAL LINUX</h1>
+    <p>Référence des principales commandes Linux organisées par catégorie. Cliquez sur l'icône de copie pour copier une commande.</p>
+
+    <!-- NAVIGATION & FICHIERS -->
+    <h3 class="section-title">📁 Navigation &amp; Fichiers</h3>
+    <div class="grid">
+      <article class="card">
+        <h2>Lister les fichiers</h2>
+        <p>Affiche le contenu du répertoire courant avec détails et fichiers cachés.</p>
+        <code>ls -la</code>
+      </article>
+      <article class="card">
+        <h2>Changer de répertoire</h2>
+        <p>Se déplace dans le répertoire spécifié.</p>
+        <code>cd /chemin/vers/dossier</code>
+      </article>
+      <article class="card">
+        <h2>Répertoire courant</h2>
+        <p>Affiche le chemin absolu du répertoire actuel.</p>
+        <code>pwd</code>
+      </article>
+      <article class="card">
+        <h2>Créer un dossier</h2>
+        <p>Crée un ou plusieurs répertoires (avec parents si nécessaire).</p>
+        <code>mkdir -p dossier/sous-dossier</code>
+      </article>
+      <article class="card">
+        <h2>Supprimer fichier/dossier</h2>
+        <p>Supprime récursivement un dossier et son contenu.</p>
+        <span class="tag warn">⚠ Prudence</span>
+        <code>rm -rf dossier/</code>
+      </article>
+      <article class="card">
+        <h2>Copier</h2>
+        <p>Copie un fichier ou un dossier vers une destination.</p>
+        <code>cp -r source/ destination/</code>
+      </article>
+      <article class="card">
+        <h2>Déplacer / Renommer</h2>
+        <p>Déplace ou renomme un fichier ou dossier.</p>
+        <code>mv ancien_nom nouveau_nom</code>
+      </article>
+      <article class="card">
+        <h2>Chercher un fichier</h2>
+        <p>Recherche un fichier par son nom dans un répertoire.</p>
+        <code>find / -name "fichier.txt"</code>
+      </article>
+      <article class="card">
+        <h2>Arborescence</h2>
+        <p>Affiche l'arborescence des répertoires en mode graphique.</p>
+        <code>tree -L 2</code>
+      </article>
+    </div>
+
+    <!-- AFFICHAGE & ÉDITION -->
+    <h3 class="section-title">📝 Affichage &amp; Édition</h3>
+    <div class="grid">
+      <article class="card">
+        <h2>Afficher un fichier</h2>
+        <p>Affiche le contenu complet d'un fichier.</p>
+        <code>cat fichier.txt</code>
+      </article>
+      <article class="card">
+        <h2>Parcourir page par page</h2>
+        <p>Permet de faire défiler un fichier long page par page.</p>
+        <code>less fichier.txt</code>
+      </article>
+      <article class="card">
+        <h2>Premières lignes</h2>
+        <p>Affiche les 20 premières lignes d'un fichier.</p>
+        <code>head -n 20 fichier.txt</code>
+      </article>
+      <article class="card">
+        <h2>Dernières lignes</h2>
+        <p>Affiche les 20 dernières lignes (ou en temps réel avec -f).</p>
+        <code>tail -n 20 fichier.txt</code>
+      </article>
+      <article class="card">
+        <h2>Éditer avec nano</h2>
+        <p>Ouvre un fichier dans l'éditeur nano (simple d'utilisation).</p>
+        <code>nano fichier.txt</code>
+      </article>
+      <article class="card">
+        <h2>Éditer avec vim</h2>
+        <p>Ouvre un fichier dans vim (puissant, courbe d'apprentissage élevée).</p>
+        <code>vim fichier.txt</code>
+      </article>
+      <article class="card">
+        <h2>Rechercher dans un fichier</h2>
+        <p>Cherche un motif dans un fichier (insensible à la casse).</p>
+        <code>grep -i "motif" fichier.txt</code>
+      </article>
+      <article class="card">
+        <h2>Rechercher récursivement</h2>
+        <p>Cherche un motif dans tous les fichiers d'un répertoire.</p>
+        <code>grep -r "motif" ./dossier/</code>
+      </article>
+    </div>
+
+    <!-- PROCESSUS & SYSTÈME -->
+    <h3 class="section-title">⚙️ Processus &amp; Système</h3>
+    <div class="grid">
+      <article class="card">
+        <h2>Processus en cours</h2>
+        <p>Affiche tous les processus avec utilisation CPU et RAM.</p>
+        <code>ps aux</code>
+      </article>
+      <article class="card">
+        <h2>Moniteur interactif</h2>
+        <p>Interface interactive pour surveiller les processus en temps réel.</p>
+        <code>htop</code>
+      </article>
+      <article class="card">
+        <h2>Tuer un processus</h2>
+        <p>Termine un processus par son identifiant (PID).</p>
+        <code>kill -9 &lt;PID&gt;</code>
+      </article>
+      <article class="card">
+        <h2>Tuer par nom</h2>
+        <p>Termine tous les processus portant ce nom.</p>
+        <code>pkill nom_processus</code>
+      </article>
+      <article class="card">
+        <h2>Utilisation disque</h2>
+        <p>Affiche l'espace disque utilisé et disponible.</p>
+        <code>df -h</code>
+      </article>
+      <article class="card">
+        <h2>Taille d'un dossier</h2>
+        <p>Calcule la taille d'un répertoire de façon lisible.</p>
+        <code>du -sh dossier/</code>
+      </article>
+      <article class="card">
+        <h2>Mémoire disponible</h2>
+        <p>Affiche l'utilisation de la RAM et du swap.</p>
+        <code>free -h</code>
+      </article>
+      <article class="card">
+        <h2>Infos système</h2>
+        <p>Affiche la version du noyau Linux et l'architecture.</p>
+        <code>uname -a</code>
+      </article>
+      <article class="card">
+        <h2>Uptime</h2>
+        <p>Temps de fonctionnement du système et charge moyenne.</p>
+        <code>uptime</code>
+      </article>
+    </div>
+
+    <!-- RÉSEAU -->
+    <h3 class="section-title">🌐 Réseau</h3>
+    <div class="grid">
+      <article class="card">
+        <h2>Interfaces réseau</h2>
+        <p>Affiche les interfaces réseau et leurs adresses IP.</p>
+        <code>ip a</code>
+      </article>
+      <article class="card">
+        <h2>Ping</h2>
+        <p>Teste la connectivité vers un hôte (5 paquets).</p>
+        <code>ping -c 5 google.com</code>
+      </article>
+      <article class="card">
+        <h2>Connexions actives</h2>
+        <p>Liste les ports ouverts et connexions réseau actives.</p>
+        <code>ss -tuln</code>
+      </article>
+      <article class="card">
+        <h2>Télécharger un fichier</h2>
+        <p>Télécharge un fichier depuis une URL.</p>
+        <code>wget https://exemple.com/fichier</code>
+      </article>
+      <article class="card">
+        <h2>Requête HTTP</h2>
+        <p>Effectue une requête HTTP et affiche la réponse.</p>
+        <code>curl -I https://exemple.com</code>
+      </article>
+      <article class="card">
+        <h2>Tracer la route</h2>
+        <p>Affiche le chemin réseau vers un hôte.</p>
+        <code>traceroute google.com</code>
+      </article>
+    </div>
+
+    <!-- PERMISSIONS & UTILISATEURS -->
+    <h3 class="section-title">🔐 Permissions &amp; Utilisateurs</h3>
+    <div class="grid">
+      <article class="card">
+        <h2>Changer les permissions</h2>
+        <p>Définit les droits en lecture/écriture/exécution.</p>
+        <code>chmod 755 fichier</code>
+      </article>
+      <article class="card">
+        <h2>Changer le propriétaire</h2>
+        <p>Change l'utilisateur et le groupe propriétaire d'un fichier.</p>
+        <code>chown user:groupe fichier</code>
+      </article>
+      <article class="card">
+        <h2>Utilisateur courant</h2>
+        <p>Affiche le nom de l'utilisateur connecté.</p>
+        <code>whoami</code>
+      </article>
+      <article class="card">
+        <h2>Changer d'utilisateur</h2>
+        <p>Bascule vers un autre compte utilisateur.</p>
+        <code>su - nom_utilisateur</code>
+      </article>
+      <article class="card">
+        <h2>Commande admin</h2>
+        <p>Exécute une commande avec les droits super-utilisateur.</p>
+        <span class="tag warn">⚠ Prudence</span>
+        <code>sudo commande</code>
+      </article>
+      <article class="card">
+        <h2>Créer un utilisateur</h2>
+        <p>Crée un nouvel utilisateur sur le système.</p>
+        <code>sudo useradd -m nom_utilisateur</code>
+      </article>
+    </div>
+
+    <!-- COMPRESSION & ARCHIVES -->
+    <h3 class="section-title">📦 Compression &amp; Archives</h3>
+    <div class="grid">
+      <article class="card">
+        <h2>Créer une archive tar.gz</h2>
+        <p>Compresse un dossier en archive .tar.gz.</p>
+        <code>tar -czf archive.tar.gz dossier/</code>
+      </article>
+      <article class="card">
+        <h2>Extraire tar.gz</h2>
+        <p>Décompresse une archive .tar.gz dans le répertoire courant.</p>
+        <code>tar -xzf archive.tar.gz</code>
+      </article>
+      <article class="card">
+        <h2>Compresser en zip</h2>
+        <p>Crée une archive zip d'un dossier.</p>
+        <code>zip -r archive.zip dossier/</code>
+      </article>
+      <article class="card">
+        <h2>Décompresser un zip</h2>
+        <p>Extrait le contenu d'une archive zip.</p>
+        <code>unzip archive.zip</code>
+      </article>
+    </div>
+
+    <!-- PACKAGES -->
+    <h3 class="section-title">📥 Gestion des Paquets (apt)</h3>
+    <div class="grid">
+      <article class="card">
+        <h2>Mettre à jour les listes</h2>
+        <p>Rafraîchit la liste des paquets disponibles.</p>
+        <code>sudo apt update</code>
+      </article>
+      <article class="card">
+        <h2>Mettre à jour les paquets</h2>
+        <p>Met à jour tous les paquets installés.</p>
+        <code>sudo apt upgrade -y</code>
+      </article>
+      <article class="card">
+        <h2>Installer un paquet</h2>
+        <p>Installe un logiciel depuis les dépôts officiels.</p>
+        <code>sudo apt install nom_paquet</code>
+      </article>
+      <article class="card">
+        <h2>Désinstaller un paquet</h2>
+        <p>Supprime un paquet et ses fichiers de configuration.</p>
+        <code>sudo apt remove --purge nom_paquet</code>
+      </article>
+      <article class="card">
+        <h2>Chercher un paquet</h2>
+        <p>Recherche un paquet dans les dépôts.</p>
+        <code>apt search nom_paquet</code>
+      </article>
+      <article class="card">
+        <h2>Nettoyer le cache</h2>
+        <p>Supprime les fichiers téléchargés inutiles.</p>
+        <code>sudo apt autoremove &amp;&amp; sudo apt clean</code>
+      </article>
+    </div>
+
+    <!-- DIVERS -->
+    <h3 class="section-title">🛠️ Divers &amp; Astuces</h3>
+    <div class="grid">
+      <article class="card">
+        <h2>Historique des commandes</h2>
+        <p>Affiche les dernières commandes saisies.</p>
+        <code>history</code>
+      </article>
+      <article class="card">
+        <h2>Effacer le terminal</h2>
+        <p>Nettoie l'affichage du terminal.</p>
+        <code>clear</code>
+      </article>
+      <article class="card">
+        <h2>Manuel d'une commande</h2>
+        <p>Affiche la documentation complète d'une commande.</p>
+        <code>man ls</code>
+      </article>
+      <article class="card">
+        <h2>Alias rapide</h2>
+        <p>Crée un raccourci pour une commande longue.</p>
+        <code>alias ll='ls -la'</code>
+      </article>
+      <article class="card">
+        <h2>Variable d'environnement</h2>
+        <p>Affiche toutes les variables d'environnement.</p>
+        <code>env</code>
+      </article>
+      <article class="card">
+        <h2>Date et heure</h2>
+        <p>Affiche la date et l'heure actuelles du système.</p>
+        <code>date</code>
+      </article>
+      <article class="card">
+        <h2>Redirection de sortie</h2>
+        <p>Redirige la sortie d'une commande vers un fichier.</p>
+        <code>ls -la &gt; sortie.txt</code>
+      </article>
+      <article class="card">
+        <h2>Pipe (enchaînement)</h2>
+        <p>Passe la sortie d'une commande en entrée d'une autre.</p>
+        <code>ls -la | grep ".txt"</code>
+      </article>
+    </div>
+  </main>
+
+  <script>
+    const ICON_COPY = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>`;
+    const ICON_CHECK = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`;
+
+    document.querySelectorAll('code').forEach(function (codeEl) {
+      var wrapper = document.createElement('div');
+      wrapper.className = 'code-wrapper';
+      codeEl.parentNode.insertBefore(wrapper, codeEl);
+      wrapper.appendChild(codeEl);
+
+      var btn = document.createElement('button');
+      btn.className = 'copy-btn';
+      btn.setAttribute('title', 'Copier');
+      btn.setAttribute('aria-label', 'Copier la commande');
+      btn.innerHTML = ICON_COPY;
+      wrapper.appendChild(btn);
+
+      btn.addEventListener('click', function () {
+        var text = codeEl.textContent;
+        navigator.clipboard.writeText(text).then(function () {
+          btn.innerHTML = ICON_CHECK;
+          btn.classList.add('copied');
+          btn.setAttribute('aria-label', 'Copié !');
+          setTimeout(function () {
+            btn.innerHTML = ICON_COPY;
+            btn.classList.remove('copied');
+            btn.setAttribute('aria-label', 'Copier la commande');
+          }, 2000);
+        }).catch(function () {
+          btn.setAttribute('title', 'Échec de la copie');
+          btn.style.color = '#ff6b6b';
+          setTimeout(function () {
+            btn.setAttribute('title', 'Copier');
+            btn.style.color = '';
+          }, 2000);
+        });
+      });
+    });
+  </script>
+</body>
+</html>

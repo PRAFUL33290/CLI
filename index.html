@@ -170,10 +170,47 @@
     a:hover {
       text-decoration: underline;
     }
+
+    .nav {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+
+    .nav a {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 0.9rem;
+      background: #0f1628;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .nav a:hover {
+      background: #1e2d50;
+      border-color: var(--accent);
+    }
+
+    .nav a.active {
+      background: #1e2d50;
+      border-color: var(--success);
+      color: var(--success);
+    }
   </style>
 </head>
 <body>
   <main class="container">
+    <nav class="nav">
+      <a href="index.html" class="active">🤖 Installation AI CLI</a>
+      <a href="linux-commands.html">🐧 Commandes Linux</a>
+    </nav>
+
     <h1>🔥 INSTALLATION AI CLI COMPLETE</h1>
     <p>
       Pack d'installation prêt à copier/coller pour les CLI IA principaux.
